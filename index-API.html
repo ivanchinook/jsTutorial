@@ -19,7 +19,9 @@
         .align-center{
             align-items: center;
         }
-        
+        .hide{
+            display: none;
+        }
    </style>
 </head>
 <body>
@@ -43,7 +45,11 @@
             </label>
             <input placeholder="ask me!" type="text" id="task">
         </form>
+
         <section class="img-container">
+            <article id="thinking" class="hide">
+                <h1> Let me think...</h1>
+            </article>
             <article id="img-article"></article>
             <h1 id="answer-text"></h1>
         </section>
@@ -51,6 +57,14 @@
             const wtfUrl = 'https://yesno.wtf/api';
             const imgArticle = document.getElementById('img-article');
             const ansText = document.getElementById('answer-text');
+            const thinkingArticle = document.getElementById('thinking');
+
+            function showThinking(){
+                thinkingArticle.classList.remove('hide');
+            }
+            function hideThinking(){
+                thinkingArticle.classList.add('hide');
+            }
 
             function decide(event){
                 event.preventDefault();
@@ -58,8 +72,9 @@
                 imgArticle.innerHTML = '';
                 ansText.innerHTML = '';
 
+                showThinking();
                 fetch(wtfUrl, {
-                  methot: 'Get'  ,
+                  method: 'Get'  ,
                   headers:{
                     'accept': 'application/json',
                   }
@@ -69,6 +84,7 @@
                     img.setAttribute('src', result.image);
                     imgArticle.appendChild(img);
                     ansText.textContent = result.answer;
+                    hideThinking();
                 })
 
             }
