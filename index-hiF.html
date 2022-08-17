@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <!-- <script src="index.js"></script> -->
+</head>
+<body>
+    <main>
+
+    </main>
+    <script>
+       const main = document.querySelector('main');
+       function headingFactory(color){
+            const closure = function(text){
+                const heading = document.createElement('h1');
+                heading.setAttribute('style', 'color: ' + color);
+                heading.textContent = text;
+                return heading;
+            }
+            return closure;
+       }
+       const createRedHeading = headingFactory('red');
+       const head1 = createRedHeading('Heyyyyyy');
+       main.appendChild(head1);
+       function createHeading(color,text){
+            const heading = document.createElement('h1');
+                heading.setAttribute('style', 'color: ' + color);
+                heading.textContent = text;
+                return heading;
+        }
+        const head2 = createHeading('blue', 'Heyyyyyy');
+        main.appendChild(head2);
+    </script>
+    <h1>baba</h1>
+</body>
+</html>
