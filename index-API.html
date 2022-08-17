@@ -11,7 +11,7 @@
             display: flex;
         }
         .justify-center{
-            justify-constent:center;
+            justify-content:center;
         }
         .flex-col{
             flex-direction: column;
@@ -43,6 +43,36 @@
             </label>
             <input placeholder="ask me!" type="text" id="task">
         </form>
-   
+        <section class="img-container">
+            <article id="img-article"></article>
+            <h1 id="answer-text"></h1>
+        </section>
+        <script>
+            const wtfUrl = 'https://yesno.wtf/api';
+            const imgArticle = document.getElementById('img-article');
+            const ansText = document.getElementById('answer-text');
+
+            function decide(event){
+                event.preventDefault();
+
+                imgArticle.innerHTML = '';
+                ansText.innerHTML = '';
+
+                fetch(wtfUrl, {
+                  methot: 'Get'  ,
+                  headers:{
+                    'accept': 'application/json',
+                  }
+                }).then(async (response) => {
+                    const result = await response.json();
+                    const img = document.createElement('img');
+                    img.setAttribute('src', result.image);
+                    imgArticle.appendChild(img);
+                    ansText.textContent = result.answer;
+                })
+
+            }
+            document.querySelector('form').addEventListener('submit', decide);
+        </script>
 </body>
 </html>
